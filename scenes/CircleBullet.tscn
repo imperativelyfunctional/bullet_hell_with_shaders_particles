@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc5af1c4n8squ"]
+
+[ext_resource type="Script" path="res://scenes/bullets/circle_bullet.gd" id="1_jy4m2"]
+[ext_resource type="Texture2D" uid="uid://c04y7dicrfqhi" path="res://stars.png" id="2_q0t4x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_srf0w"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 3
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_ykuxb"]
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.34106, 193.195), 0.0, 0.0, 0, 0, Vector2(0.884827, 110.05), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="CircleBullet" type="Node2D"]
+position = Vector2(331, 338)
+script = ExtResource("1_jy4m2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 0.25098, 0.105882, 1)
+clip_children = 2
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_srf0w")
+amount = 60
+lifetime = 0.4
+randomness = 0.17
+lifetime_randomness = 0.37
+texture = ExtResource("2_q0t4x")
+emission_shape = 1
+emission_sphere_radius = 19.98
+spread = 67.3
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("Curve_ykuxb")
+anim_offset_min = 1.0
+anim_offset_max = 1.0
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
